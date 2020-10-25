@@ -4,6 +4,7 @@ require("../php/msql.php");
 require("../php/get_user_info.php");
 
 $user_points = null;
+$msg = null;
 
 if(!isset($_SESSION['discord_userId'])){
   echo "<script>location.replace('../login');</script>";
@@ -24,6 +25,11 @@ $user_data = new userUserInfo;
 
 $disc_userid = $_SESSION['discord_userId'];
 $userid = $user_data->getUserRowId($disc_userid);
+
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+  echo "<script>alert('{$_POST['buy-btn']}');</script>";
+  $msg = "You bought product {$_POST['buy-btn']}";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,6 +49,7 @@ $userid = $user_data->getUserRowId($disc_userid);
     <title>Dashboard - Requiem Refferal System</title>
   </head>
   <body>
+    <?= $msg ?>
     <div>
       <div class="pos-f-t">
         <!---<div class="collapse" id="navbarToggleExternalContent">
@@ -116,27 +123,36 @@ $userid = $user_data->getUserRowId($disc_userid);
         ";
       }
       ?>
-      <div class="container">
       <div class="store-shop">
-        <div class="container-fluid">
+        <form method="post">
           <h4>Store</h4>
-          <?php
-          $sql = "SELECT * FROM products";
-          $result = mysqli_query($conn, $sql);
-          if(mysqli_num_rows($result) > 0){
-            while($row = mysqli_fetch_array($result)){
-              echo "<div class=\"row\">
-            <div class=\"col-sm\">
-              <label for=\"playerName\">{$row['name']}</label>
-              <span class=\"store-price\" name=\"\">\${$row['price']}</span>
-              <button class=\"btn btn-primary\" name=\"{$row['id']}\">Buy</button>
+          <div class="container-fluid">
+            <div class="row">
+              <?php
+              $sql = "SELECT * FROM products";
+              $result = mysqli_query($conn, $sql);
+              if(mysqli_num_rows($result) > 0){
+                while($row = mysqli_fetch_array($result)){
+                  echo "<div class=\"col-sm\">
+                  <div class=\"store-item\">
+                    <label for=\"price\">{$row['name']}</label>
+                    &nbsp;
+                    <br>
+                    <span class=\"store-price\" name=\"price\">{$row['price']} points</span>
+                    &nbsp;
+                    <br>
+                    <button type=\"submit\" class=\"btn btn-primary\" name=\"buy-btn\" value=\"{$row['id']}\">Buy</button>
+                  </div>
+                </div>";
+                }
+              }
+              ?>
             </div>
-          </div>";
-            }
-          }
-          ?>
-        </div>
+          </div>
+        </form>
       </div>
+      &nbsp;
+      <br>
     </div>
   </body>
 </html>
