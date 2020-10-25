@@ -23,7 +23,7 @@ body{
 
 .user-creds-username {
   color: white;
-
+  
 }
 .user-creds-text {
   display: table-cell;
@@ -44,6 +44,12 @@ body{
   text-decoration: underline;
   color: #E6C200;
 }
-.wrapper {
 
+.store-shop{
+  background-color: #324c5e;
+  color: white;
+}
+.store-item{
+  background-color: #396483;
+  border-radius: 4px;
 }
