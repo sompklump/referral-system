@@ -48,8 +48,12 @@ body{
 .store-shop{
   background-color: #324c5e;
   color: white;
+  padding: 1rem;
 }
 .store-item{
   background-color: #396483;
   border-radius: 4px;
+}
+.store-header {
+  
 }
