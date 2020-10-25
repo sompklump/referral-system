@@ -123,7 +123,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         ";
       }
       ?>
-      <div>
+      <div class="container">
         <div class="store-shop">
           <form method="post">
             <h4>Store</h4>
