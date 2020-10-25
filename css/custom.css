@@ -23,7 +23,7 @@ body{
 
 .user-creds-username {
   color: white;
-  
+
 }
 .user-creds-text {
   display: table-cell;
@@ -43,4 +43,7 @@ body{
 .requm-link-active {
   text-decoration: underline;
   color: #E6C200;
+}
+.wrapper {
+
 }

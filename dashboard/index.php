@@ -116,6 +116,7 @@ $userid = $user_data->getUserRowId($disc_userid);
         ";
       }
       ?>
+      <div class="container">
       <div class="store-shop">
         <div class="container-fluid">
           <h4>Store</h4>
