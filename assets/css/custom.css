@@ -23,7 +23,7 @@ body{
 /* fuck this man */
 .user-creds-username {
   color: white;
-  
+
 }
 .user-creds-text {
   display: table-cell;
@@ -44,18 +44,7 @@ body{
   text-decoration: underline;
   color: #E6C200;
 }
-<<<<<<< HEAD:css/custom.css
 .wrapper {
   margin-left: 8rem;
   margin-right: 8rem;
-=======
-
-.store-shop{
-  background-color: #324c5e;
-  color: white;
-}
-.store-item{
-  background-color: #396483;
-  border-radius: 4px;
->>>>>>> 0f6d8f56f5909bbf88547981e2fc6d2546eb3dad:assets/css/custom.css
 }
