@@ -123,33 +123,35 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         ";
       }
       ?>
-      <div class="store-shop">
-        <form method="post">
-          <h4>Store</h4>
-          <div class="container-fluid">
-            <div class="row">
-              <?php
-              $sql = "SELECT * FROM products";
-              $result = mysqli_query($conn, $sql);
-              if(mysqli_num_rows($result) > 0){
-                while($row = mysqli_fetch_array($result)){
-                  echo "<div class=\"col-sm\">
-                  <div class=\"store-item\">
-                    <label for=\"price\">{$row['name']}</label>
-                    &nbsp;
-                    <br>
-                    <span class=\"store-price\" name=\"price\">{$row['price']} points</span>
-                    &nbsp;
-                    <br>
-                    <button type=\"submit\" class=\"btn btn-primary\" name=\"buy-btn\" value=\"{$row['id']}\">Buy</button>
-                  </div>
-                </div>";
+      <div>
+        <div class="store-shop">
+          <form method="post">
+            <h4>Store</h4>
+            <div class="container-fluid">
+              <div class="row">
+                <?php
+                $sql = "SELECT * FROM products";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                  while($row = mysqli_fetch_array($result)){
+                    echo "<div class=\"col-sm\">
+                    <div class=\"store-item\">
+                      <label for=\"price\">{$row['name']}</label>
+                      &nbsp;
+                      <br>
+                      <span class=\"store-price\" name=\"price\">{$row['price']} points</span>
+                      &nbsp;
+                      <br>
+                      <button type=\"submit\" class=\"btn btn-primary\" name=\"buy-btn\" value=\"{$row['id']}\">Buy</button>
+                    </div>
+                  </div>";
+                  }
                 }
-              }
-              ?>
+                ?>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
       &nbsp;
       <br>
