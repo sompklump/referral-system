@@ -78,15 +78,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             <!--<button style="float:left;margin-right: 20px;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>--->
-            <ul class="navbar-nav">
-              <a class="navbar-brand" href="#">
-                <img for="profile-name" src="https://cdn.discordapp.com/avatars/<?= $user_creds->id ?>/<?= $user_creds->avatar ?>.png" width="30" height="30" class="d-inline-block align-top" alt="profile avatar">
-                <span name="profile-name" class="user-creds-username user-creds-text"><p><?= $user_creds->username."#".$user_creds->discriminator ?></p></span>
-              </a>
-              <li class="nav-item">
-                <font color="white"><span class="user-creds-text"><?= $user_points ?> points</span></font>
-              </li>
-            </ul>
+            <img class="user-creds-avatar" src="https://cdn.discordapp.com/avatars/<?= $user_creds->id ?>/<?= $user_creds->avatar ?>.png" alt="profile avatar">
+            <span class="user-creds-username user-creds-text"><p><?= $user_creds->username."#".$user_creds->discriminator ?></p></span>
+            <font color="white"><span class="user-creds-text"><?= $user_points ?> points</span></font>
           </div>
           <nav class="navbar-expand-sm">
             <ul class="navbar-nav">
@@ -97,8 +91,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 <a class="nav-link requm-link" href="../store/">Store</a>
               </li>
               <li class="nav-item">
-                <a href="?logout" class="requm-link">Logout <i class="fas fa-sign-out-alt"></i></a>
+                <a class="nav-link requm-link" href="../cart/">Cart</a>
               </li>
+              <a href="?logout" class="navbar-brand requm-link">Logout <i class="fas fa-sign-out-alt"></i></a>
             </ul>
           </nav>
           

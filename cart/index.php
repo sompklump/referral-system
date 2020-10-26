@@ -18,6 +18,10 @@ if(!isset($_SESSION['discord_userId'])){
   die;
 }
 
+if(isset($_SESSION['requiem-cart'])){
+  $cart = json_decode($_SESSION['requiem-cart']);
+}
+
 $sql = "SELECT * FROM users WHERE discord_id = '{$user_creds->id}'";
 $result = mysqli_query($conn, $sql);
 if(mysqli_num_rows($result) > 0) {
@@ -27,20 +31,11 @@ if(mysqli_num_rows($result) > 0) {
 }
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
-  if(isset($_POST['cart-btn'])){
-    $product_id = $_POST['cart-btn'];
+  if(isset($_POST['buy-btn'])){
     $sql = "SELECT * FROM products WHERE id = '$product_id'";
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) > 0) {
       while($row = mysqli_fetch_array($result)){
-        $price = $row['price'];
-        $name = $row['name'];
-        $error_msg = "Added $name to your <a href='../cart/'>cart</a>";
-        $error_class = "success";
-        if(!in_array($product_id, $cart)){
-          array_push($cart, $product_id);
-          $_SESSION['requiem-cart'] = json_encode($cart);
-        }
       }
     }
   }
@@ -61,7 +56,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <title>Store - Requiem Refferal System</title>
+    <title>Cart - Requiem Refferal System</title>
   </head>
   <body>
     <div>
@@ -84,10 +79,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 <a class="nav-link requm-link" href="../dashboard/">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link requm-link requm-link-active" href="#">Store</a>
+                <a class="nav-link requm-link" href="../store/">Store</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link requm-link" href="../cart/">Cart</a>
+                <a class="nav-link requm-link requm-link-active" href="#">Cart</a>
               </li>
               <a href="?logout" class="navbar-brand requm-link">Logout <i class="fas fa-sign-out-alt"></i></a>
             </ul>
@@ -100,25 +95,26 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
       </div>
       <div class="store-shop">
         <form method="post">
-          <span class="store-header"><h4>Store</h4></span>
+          <span class="store-header"><h4>Cart</h4></span>
           <div class="container-fluid">
             <div class="row">
               <?php
-              $sql = "SELECT * FROM products";
-              $result = mysqli_query($conn, $sql);
-              if(mysqli_num_rows($result) > 0){
-                while($row = mysqli_fetch_array($result)){
-                  echo "<div class=\"col-sm\">
-                              <div class=\"store-item\">
-                                <label for=\"price\">{$row['name']}</label>
-                                &nbsp;
-                                <br>
-                                <span class=\"store-price\" name=\"price\">{$row['price']} points</span>
-                                &nbsp;
-                                <br>
-                                <button type=\"submit\" class=\"btn btn-primary\" name=\"cart-btn\" value=\"{$row['id']}\">Add to Cart</button>
-                              </div>
-                            </div>";
+              if(count($cart) > 0){
+                $sql = "SELECT * FROM products";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                  while($row = mysqli_fetch_array($result)){
+                    if(in_array($row['id'], $cart)){
+                      echo "<div class=\"col-sm\">
+                                  <div class=\"store-item\">
+                                    <label for=\"price\">{$row['name']}</label>
+                                    &nbsp;
+                                    <br>
+                                    <span class=\"store-price\" name=\"price\">{$row['price']} points</span>
+                                  </div>
+                                </div>";
+                    }
+                  }
                 }
               }
               ?>
